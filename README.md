@@ -1,4 +1,4 @@
-# 🌟 README - Módulo 1: Introdução ao Angular
+# 🌟 Módulo 1: Introdução ao Angular
 
 ## 📘 1. O que é Angular?
 
@@ -167,7 +167,7 @@ li {
 
 ---
 
-## 🎨 9. Publicando no GitHub Pages
+## 🎨 9. Publicando no GitHub Pages (Dever de Casa)
 
 1. **Gerar o build**:
 
