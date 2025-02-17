@@ -1,59 +1,201 @@
-# SimuladorSorteio
+# 🌟 README - Módulo 1: Introdução ao Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+## 📘 1. O que é Angular?
 
-## Development server
+Angular é um **framework front-end** baseado em TypeScript, desenvolvido pelo Google. Ele permite criar **aplicações web dinâmicas** e **Single Page Applications (SPAs)**.
 
-To start a local development server, run:
+### 📏 Diferença entre Angular, React e Vue
+
+| Tecnologia  | Característica Principal                                           |
+| ----------- | ------------------------------------------------------------------ |
+| **Angular** | Framework completo com TypeScript, ideal para projetos escaláveis. |
+| **React**   | Biblioteca focada apenas na interface do usuário, utiliza JSX.     |
+| **Vue.js**  | Framework leve e progressivo, fácil de aprender.                   |
+
+---
+
+## 🛠️ 2. Instalando Angular
+
+### 🔄 Passo 1: Instalar o Node.js
+
+Baixe e instale o [Node.js](https://nodejs.org/).  
+Verifique a versão instalada:
 
 ```bash
+node -v
+npm -v
+```
+
+### 🔄 Passo 2: Instalar o Angular CLI
+
+```bash
+npm install -g @angular/cli
+```
+
+Verifique a instalação:
+
+```bash
+ng version
+```
+
+---
+
+## 🎨 3. Criando um Projeto Angular
+
+Crie um novo projeto:
+
+```bash
+ng new simulador-sorteio
+cd simulador-sorteio
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse no navegador: **http://localhost:4200/**.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🌐 4. Estrutura do Projeto
 
 ```bash
-ng generate --help
+simulador-sorteio/
+│── src/
+│   │── app/
+│   │   │── app.component.ts    # Componente principal
+│   │   │── app.module.ts       # Módulo raiz
+│   │── index.html              # HTML principal
 ```
 
-## Building
+---
 
-To build the project run:
+## 🛠️ 5. Criando o Componente de Sorteio
 
 ```bash
-ng build
+ng generate component sorteio
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Inclua no `app.component.html`:
 
-## Running unit tests
+```html
+<app-sorteio></app-sorteio>
+```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
+
+## 🌟 6. Criando a Interface
+
+Edite `sorteio.component.html`:
+
+```html
+<h2>Simulador de Sorteio</h2>
+<input type="text" [(ngModel)]="nome" placeholder="Digite um nome" />
+<button (click)="adicionarNome()">Adicionar</button>
+<ul>
+  <li *ngFor="let nome of nomes">{{ nome }}</li>
+</ul>
+<button (click)="sortearNome()">Sortear</button>
+<h3 *ngIf="sorteado">Nome sorteado: {{ sorteado }}</h3>
+```
+
+---
+
+## 🌐 7. Criando a Lógica
+
+Edite `sorteio.component.ts`:
+
+```typescript
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "app-sorteio",
+  templateUrl: "./sorteio.component.html",
+  styleUrls: ["./sorteio.component.css"],
+})
+export class SorteioComponent {
+  nome: string = "";
+  nomes: string[] = [];
+  sorteado: string | null = null;
+
+  adicionarNome() {
+    if (this.nome.trim() !== "") {
+      this.nomes.push(this.nome);
+      this.nome = "";
+    }
+  }
+
+  sortearNome() {
+    if (this.nomes.length > 0) {
+      const indice = Math.floor(Math.random() * this.nomes.length);
+      this.sorteado = this.nomes[indice];
+    }
+  }
+}
+```
+
+---
+
+## 🌈 8. Melhorando a Estilização
+
+Edite `sorteio.component.css`:
+
+```css
+input,
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f4f4f4;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+```
+
+---
+
+## 🎨 9. Publicando no GitHub Pages
+
+1. **Gerar o build**:
 
 ```bash
-ng test
+ng build --base-href "/simulador-sorteio/"
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+2. **Instalar pacote de deploy**:
 
 ```bash
-ng e2e
+npm install -g angular-cli-ghpages
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+3. **Publicar**:
 
-## Additional Resources
+```bash
+ngh --dir=dist/simulador-sorteio
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Acesse seu repositório no **GitHub Pages**! 🚀
+
+---
+
+## 🚀 Conclusão
+
+✔ Criamos um projeto Angular do zero.  
+✔ Entendemos **componentes, diretivas e data binding**.  
+✔ Criamos um **Simulador de Sorteio**.  
+✔ Publicamos no **GitHub Pages**.
+
+Agora você está pronto para avançar para o **Módulo 2**! 🚀
