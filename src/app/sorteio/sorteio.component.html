@@ -1,11 +1,19 @@
-<h2>Simulador de Sorteio</h2>
+<div class="sorteio-container">
+  <h2>Simulador de Sorteio</h2>
 
-<input type="text" [(ngModel)]="nome" placeholder="Digite um nome" />
-<button (click)="adicionarNome()">Adicionar</button>
+  <input
+    type="text"
+    [(ngModel)]="nome"
+    placeholder="Digite um nome"
+    (keyup.enter)="adicionarNome()"
+  />
+  <button (click)="adicionarNome()">Adicionar</button>
 
-<ul>
-  <li *ngFor="let nome of nomes">{{ nome }}</li>
-</ul>
+  <button (click)="sortearNome()">Sortear</button>
+  <h3 *ngIf="sorteado">Nome sorteado: {{ sorteado }}</h3>
 
-<button (click)="sortearNome()">Sortear</button>
-<h3 *ngIf="sorteado">Nome sorteado: {{ sorteado }}</h3>
+  <h3>Lista de nomes</h3>
+  <ul>
+    <li *ngFor="let nome of nomes">{{ nome }}</li>
+  </ul>
+</div>

@@ -1,23 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // ✅ Necessário para [(ngModel)]
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sorteio',
-  standalone: true, // ✅ AGORA É STANDALONE
+  standalone: true,
   templateUrl: './sorteio.component.html',
   styleUrls: ['./sorteio.component.css'],
-  imports: [CommonModule, FormsModule], // ✅ IMPORTA CommonModule para *ngIf e *ngFor
+  imports: [CommonModule, FormsModule],
 })
-export class SorteioComponent {
+export class SorteioComponent implements OnInit {
   nome: string = '';
   nomes: string[] = [];
   sorteado: string | null = null;
+
+  ngOnInit() {
+    // Recupera os nomes salvos no Local Storage ao carregar a página
+    const nomesSalvos = localStorage.getItem('nomes');
+    if (nomesSalvos) {
+      this.nomes = JSON.parse(nomesSalvos);
+    }
+  }
 
   adicionarNome() {
     if (this.nome.trim() !== '') {
       this.nomes.push(this.nome);
       this.nome = '';
+
+      // Salva a lista atualizada no Local Storage
+      localStorage.setItem('nomes', JSON.stringify(this.nomes));
     }
   }
 
@@ -26,5 +37,11 @@ export class SorteioComponent {
       const indice = Math.floor(Math.random() * this.nomes.length);
       this.sorteado = this.nomes[indice];
     }
+  }
+
+  removerNomes() {
+    this.nomes = [];
+    this.sorteado = null;
+    localStorage.removeItem('nomes');
   }
 }
